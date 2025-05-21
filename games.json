@@ -70,6 +70,11 @@
         "image": "/cache/data/image/game/solitaire-mahjong/solitaire-mahjong-m186x186.webp"
     },
     {
+        "name": "Uphill Rush 13",
+        "slug": "uphill-rush-13",
+        "image": "/cache/data/image/game/uphill-rush-13/uphill-rush-13-m186x186.webp"
+    },
+    {
         "name": "Snow Rush 3D",
         "slug": "snow-rush-3d",
         "image": "/cache/data/image/game/snow-rush-3d/snow-rush-3d-m186x186.webp"
@@ -133,10 +138,5 @@
         "name": "Physics Balls",
         "slug": "physics-balls",
         "image": "/cache/data/image/game/physics-balls/physics-balls-m186x186.webp"
-    },
-    {
-        "name": "Uphill Rush 13",
-        "slug": "uphill-rush-13",
-        "image": "/cache/data/image/game/uphill-rush-13/uphill-rush-13-m186x186.webp"
     }
 ]

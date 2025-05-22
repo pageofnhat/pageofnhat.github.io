@@ -161,11 +161,11 @@ function search_json() {
                         console.log('result lenght:' + games.length);
 
                         games.forEach(function (item, index) {
-                        let url_game = "";
-                            if (item.slug === game_config.home_page){
+                            let url_game = "";
+                            if (item.slug === game_config.home_page) {
                                 url_game = "/";
-                            }else {
-                                url_game = "/"+item.slug+".html";
+                            } else {
+                                url_game = "/" + item.slug + ".html";
                             }
                             str_html += `<a href="${url_game}" class="link_search_complete w-full flex items-center group transition-all duration-300 gap-4 p-2"> <div class="relative flex-shrink-0 rounded overflow-hidden ring-2 ring-[#007b43]/20 transition-all duration-300 w-8 h-8"> <img src="${item.image}" alt="${item.name}" class="object-cover w-full h-full flex-shrink-0 transition-transform duration-500 group-hover:scale-110" loading="lazy"></div> <div class="flex-1 min-w-0 text-left text_search_complete text_color">${item.name}</div> </a>`;
                         });
@@ -813,7 +813,7 @@ function favorite(e) {
     var id = $(e).data('id');
     var slug = $(e).data("slug");
     var name = $(e).data("name");
-    var url = $(e).data("name");
+    var url = $(e).data("url");
 
     var showAddText;
 
@@ -822,7 +822,7 @@ function favorite(e) {
         $(e).removeClass('favorited');
         showAddText = true;
     } else {
-        save_wishlish_cookies(id, slug, image, name,url);
+        save_wishlish_cookies(id, slug, image, name, url);
         $(e).addClass('favorited');
         showAddText = false;
     }
@@ -877,7 +877,7 @@ function remove_wishlist_cookies(_id) {
     }
 }
 
-function save_wishlish_cookies(_id, _slug, _image, _name,_url) {
+function save_wishlish_cookies(_id, _slug, _image, _name, _url) {
     var favorites_count = 10;
     if (!!readFromLocalStorage('favorite_game') && _slug !== '' && _image !== '' && _id !== '' && _name != '') {
         var favorite_array = readFromLocalStorage('favorite_game');

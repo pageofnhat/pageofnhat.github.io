@@ -813,6 +813,7 @@ function favorite(e) {
     var id = $(e).data('id');
     var slug = $(e).data("slug");
     var name = $(e).data("name");
+    var url = $(e).data("name");
 
     var showAddText;
 
@@ -821,7 +822,7 @@ function favorite(e) {
         $(e).removeClass('favorited');
         showAddText = true;
     } else {
-        save_wishlish_cookies(id, slug, image, name);
+        save_wishlish_cookies(id, slug, image, name,url);
         $(e).addClass('favorited');
         showAddText = false;
     }
@@ -876,7 +877,7 @@ function remove_wishlist_cookies(_id) {
     }
 }
 
-function save_wishlish_cookies(_id, _slug, _image, _name) {
+function save_wishlish_cookies(_id, _slug, _image, _name,_url) {
     var favorites_count = 10;
     if (!!readFromLocalStorage('favorite_game') && _slug !== '' && _image !== '' && _id !== '' && _name != '') {
         var favorite_array = readFromLocalStorage('favorite_game');
@@ -887,7 +888,7 @@ function save_wishlish_cookies(_id, _slug, _image, _name) {
             }
         });
         favorite_array.push({
-            "id": _id, "slug": _slug, "image": _image, "name": _name
+            "id": _id, "slug": _slug, "image": _image, "name": _name, "url": _url
         });
         if (favorite_array.length > favorites_count) {
             favorite_array.shift();
@@ -896,7 +897,7 @@ function save_wishlish_cookies(_id, _slug, _image, _name) {
     } else {
         var data = [];
         data.push({
-            "id": _id, "slug": _slug, "image": _image, "name": _name
+            "id": _id, "slug": _slug, "image": _image, "name": _name, "url": _url
         });
         saveToLocalStorage('favorite_game', JSON.stringify(data));
     }
@@ -913,13 +914,11 @@ function load_wishlist_cookies() {
             var str_wishlist = '';
             let str = '';
             var $leng = favorites.length;
-            var slug_array = [];
-            let label_game = '';
             str += '<span class="svg-icon svg-icon--heart btn__icon" aria-hidden="true"> <svg class="svg-icon__link"> <use xlink:href="#icon-heart"></use> </svg> </span>';
             for (var i = $leng - 1; i >= 0; i--) {
                 var value = favorites[i];
-                slug_array.push(value.slug + "_" + value.kind);
-                str_wishlist += '<a href="' + value.slug + '" class="thumb-card relative group relative block h-full overflow-hidden rounded-xl bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md shadow-lg hover:shadow-2xl transform transition-all duration-300 hover:-translate-y-1.5 will-change-transform"><div class="w-full overflow-hidden"><img src="' + value.image + '" alt="' + value.name + '" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" class="object-cover" loading="lazy" style=""></div><div class="px-2 py-2 title-game"><span class="text-sm md:text-base font-medium text-[#007b43] group-hover:text-[#00a35a] transition-colors duration-300 line-clamp-2">' + value.name + '</span></div></a>'
+
+                str_wishlist += '<a href="' + value.url + '" class="thumb-card relative group relative block h-full overflow-hidden rounded-xl bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md shadow-lg hover:shadow-2xl transform transition-all duration-300 hover:-translate-y-1.5 will-change-transform"><div class="w-full overflow-hidden"><img src="' + value.image + '" alt="' + value.name + '" sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw" class="object-cover" loading="lazy" style=""></div><div class="px-2 py-2 title-game"><span class="text-sm md:text-base font-medium text-[#007b43] group-hover:text-[#00a35a] transition-colors duration-300 line-clamp-2">' + value.name + '</span></div></a>'
 
                 if (value.slug === game_config.current_slug && !$(".favorites-add-" + value.id).hasClass('favorited')) {
                     $(".favorites-add-" + value.id).addClass("favorited");
